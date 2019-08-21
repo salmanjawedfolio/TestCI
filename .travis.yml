@@ -22,7 +22,7 @@ deploy:
   target_commitish: $TRAVIS_COMMIT 
   api_key:
     secure: $GITHUB_API_KEY
-  file: "app/build/outputs/apk/release/*"
+  file: "app/build/outputs/apk/release/app-release-unsigned.apk"
   overwrite: true
   skip_cleanup: true
 #after_deploy:
