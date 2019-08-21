@@ -1,6 +1,6 @@
 sudo: required
 language: android
-dist: trusty
+jdk: oraclejdk8
 env:
  global:
     - ANDROID_API_LEVEL=29
@@ -10,14 +10,9 @@ env:
     - ADB_INSTALL_TIMEOUT=20
 before_install:
  - chmod +x gradlew
-before_script:
-  - android list targets
-  # Create and start emulator.
-  #- echo no | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI
-  - echo no | android create avd --force -n test -t android-29 --abi x86
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+ - yes | sdkmanager "platforms;android-29"
+script:
+    - ./gradlew assembleDebug
 android:
   components:
     # Uncomment the lines below if you want to
@@ -34,8 +29,6 @@ android:
     # Support library
     - extra-android-support
     
-
-
     # Additional components
     - extra-google-google_play_services
     - extra-google-m2repository
@@ -44,8 +37,8 @@ android:
 
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    - sys-img-x86-android-$ANDROID_EMULATOR_LEVEL
-    - sys-img-armeabi-v7a-android-$ANDROID_EMULATOR_LEVEL
-    - sys-img-armeabi-v7a-google_apis-$ANDROID_EMULATOR_LEVEL
+    #- sys-img-x86-android-$ANDROID_EMULATOR_LEVEL
+    #- sys-img-armeabi-v7a-android-$ANDROID_EMULATOR_LEVEL
+    #- sys-img-armeabi-v7a-google_apis-$ANDROID_EMULATOR_LEVEL
   licenses:
     - '.+'
