@@ -1,6 +1,9 @@
 sudo: required
 language: android
 jdk: oraclejdk8
+notifications:
+   on_success: never
+   on_failure: never
 env:
  global:
     - ANDROID_API_LEVEL=29
@@ -17,7 +20,6 @@ deploy:
   provider: releases
   on:
     branch: master
-  prerelease: true
   overwrite: true
   target_commitish: $TRAVIS_COMMIT 
   api_key:
