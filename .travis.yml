@@ -17,11 +17,11 @@ deploy:
   provider: releases
   api_key:
     secure: $GITHUB_API_KEY
-  file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/app-release-unsigned.apk
+  file: app/build/outputs/apk/app-release-unsigned.apk
   overwrite: true
   skip_cleanup: true
 after_deploy:
-  - rm -rf $TRAVIS_BUILD_DIR/app/build/outputs
+  - rm -rf app/build/outputs
 android:
   components:
     # Uncomment the lines below if you want to
