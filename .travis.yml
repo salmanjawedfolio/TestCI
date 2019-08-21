@@ -12,7 +12,13 @@ before_install:
  - chmod +x gradlew
  - yes | sdkmanager "platforms;android-29"
 script:
-    - ./gradlew assembleDebug
+    - ./gradlew assembleRelease
+deploy:
+  provider: releases
+  api_key:
+    secure: $GITHUB_API_KEY
+  file: app/build/outputs/apk/app-release.apk
+  skip_cleanup: true    
 android:
   components:
     # Uncomment the lines below if you want to
