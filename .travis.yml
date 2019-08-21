@@ -13,11 +13,14 @@ before_install:
  - yes | sdkmanager "platforms;android-29"
 script:
     - ./gradlew assembleRelease
+before_deploy:
+    - cp ./app/build/outputs/apk/*.apk
 deploy:
   provider: releases
   api_key:
     secure: $GITHUB_API_KEY
-  file: app/build/outputs/apk/app-release-unsigned.apk
+  file:
+    - "app-release-unsigned.apk"
   overwrite: true
   skip_cleanup: true
 after_deploy:
