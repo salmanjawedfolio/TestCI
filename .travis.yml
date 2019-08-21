@@ -15,13 +15,18 @@ script:
     - ./gradlew build
 deploy:
   provider: releases
+  on:
+    branch: master
+  prerelease: true
+  overwrite: true
+  target_commitish: $TRAVIS_COMMIT 
   api_key:
     secure: $GITHUB_API_KEY
-    file: "app/build/outputs/apk/release/app-release-unsigned.apk"
+  file: "app/build/outputs/apk/release/*"
   overwrite: true
   skip_cleanup: true
-after_deploy:
-  - rm -rf app/build/outputs
+#after_deploy:
+# - rm -rf app/build/outputs
 android:
   components:
     # Uncomment the lines below if you want to
